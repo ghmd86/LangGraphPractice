@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(python -c \"import dotenv; print\\(dotenv.__file__\\)\")",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\ghmd8\\\\PycharmProjects\\\\PythonProject\\\\.venv\\\\lib\\\\site-packages\\\\\" | Where-Object { $_.Name -match \"dotenv\" })"
+    ]
+  }
+}
