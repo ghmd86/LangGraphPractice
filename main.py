@@ -1,3 +1,4 @@
+
 from langchain.chains.question_answering.map_reduce_prompt import messages
 from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_mistralai import ChatMistralAI
@@ -95,7 +96,19 @@ def message_object():
         HumanMessage(content="What are the things to avoid when having high fever")
     ]
     response = model.invoke(messages)
+    messages.append(response)
     print(response.content)
+
+def multimodel_exercise():
+    models = {
+        "qwen3:0.6b": init_chat_model(model="qwen3:0.6b", model_provider="ollama"),
+        "phi4": init_chat_model(model="phi4", model_provider="ollama")
+    }
+    prompt = "What is AI?"
+    models["mistral"] = init_chat_model(model="mistral-small-2603")
+    for model_name, model in models.items():
+        response = model.invoke(prompt)
+        print(f"{model_name}: {response.content}")
 
 if __name__ == "__main__":
     # main()
@@ -103,4 +116,5 @@ if __name__ == "__main__":
     # excessive()
     # ollamaAgent()
     # exercise_multi_model()
-    message_object()
+    # message_object()
+    multimodel_exercise()
