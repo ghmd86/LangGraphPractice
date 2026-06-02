@@ -3,13 +3,15 @@ name = "pythonproject"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
     "langchain>=0.3.30",
     "langchain-anthropic>=0.3.22",
+    "langchain-chroma>=1.1.0",
     "langchain-core>=0.3.86",
     "langchain-mistralai>=0.2.12",
     "langchain-ollama>=0.3.10",
+    "langchain-text-splitters>=1.1.2",
     "langgraph>=0.6.11",
     "python-dotenv>=1.2.1",
 ]

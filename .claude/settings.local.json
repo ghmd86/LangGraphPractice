@@ -5,7 +5,9 @@
       "PowerShell(Get-ChildItem \"C:\\\\Users\\\\ghmd8\\\\PycharmProjects\\\\PythonProject\\\\.venv\\\\lib\\\\site-packages\\\\\" | Where-Object { $_.Name -match \"dotenv\" })",
       "PowerShell(Get-Process *)",
       "PowerShell(Get-CimInstance *)",
-      "PowerShell(Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{N='Used\\(GB\\)';E={[math]::Round\\($_.Used/1GB,1\\)}}, @{N='Free\\(GB\\)';E={[math]::Round\\($_.Free/1GB,1\\)}}, @{N='Total\\(GB\\)';E={[math]::Round\\(\\($_.Used+$_.Free\\)/1GB,1\\)}} | Format-Table -AutoSize)"
+      "PowerShell(Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{N='Used\\(GB\\)';E={[math]::Round\\($_.Used/1GB,1\\)}}, @{N='Free\\(GB\\)';E={[math]::Round\\($_.Free/1GB,1\\)}}, @{N='Total\\(GB\\)';E={[math]::Round\\(\\($_.Used+$_.Free\\)/1GB,1\\)}} | Format-Table -AutoSize)",
+      "Bash(uv sync *)",
+      "Bash(uv python *)"
     ]
   }
 }
