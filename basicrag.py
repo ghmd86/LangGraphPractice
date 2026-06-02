@@ -90,5 +90,38 @@ def demo_basic_rag():
         print(f"question: {question}")
         print(f"Answer: {answer}")
 
+
+def demo_rag_with_sources():
+
+    vector_store = create_know_base()
+    retreiver = vector_store.as_retriever(
+        search_type="similarity", search_kwargs={"k": 2})
+
+    def format_output(docs):
+        formatted = []
+        for i, doc in enumerate(docs):
+            source = doc.metadata.get("source", "unknown")
+            formatted.append(f"[{i+1}] {source} \n {doc.page_content}")
+    prompt = ChatPromptTemplate.from_template("""
+    Answer the questions from context:
+    {context}
+    question (include source): {question}
+    
+    Answer: 
+    """)
+    rag_pipeline = (
+        {"context" : retreiver | format_output,
+         "question" : RunnablePassthrough()}
+        | prompt
+        | llm
+        | StrOutputParser()
+    )
+
+    answer = rag_pipeline.invoke("Explain the workflow of langGraph?")
+
+    print(answer)
+
+
 if __name__ == "__main__":
-    demo_basic_rag()
+    # demo_basic_rag()
+    demo_rag_with_sources()
