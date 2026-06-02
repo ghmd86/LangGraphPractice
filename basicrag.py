@@ -97,20 +97,22 @@ def demo_rag_with_sources():
     retreiver = vector_store.as_retriever(
         search_type="similarity", search_kwargs={"k": 2})
 
-    def format_output(docs):
+    def format_output_with_sources(docs):
         formatted = []
         for i, doc in enumerate(docs):
             source = doc.metadata.get("source", "unknown")
             formatted.append(f"[{i+1}] {source} \n {doc.page_content}")
+
+        return "\n\n".join(formatted)
     prompt = ChatPromptTemplate.from_template("""
-    Answer the questions from context:
+    Answer the questions from context include the sources if you have them:
     {context}
     question (include source): {question}
     
     Answer: 
     """)
     rag_pipeline = (
-        {"context" : retreiver | format_output,
+        {"context" : retreiver | format_output_with_sources,
          "question" : RunnablePassthrough()}
         | prompt
         | llm
